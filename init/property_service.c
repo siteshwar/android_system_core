@@ -452,10 +452,12 @@ void handle_property_set_fd()
 
         if (msg.name) {
             /* If we have a value, copy it over, otherwise returns the default */
-            rproperty = property_get(msg.name);
-            if (rproperty) {
+            rproperty = malloc(PROP_VALUE_MAX);
+            int ret = property_get(msg.name, rproperty);
+            if (ret) {
                 strlcpy(msg.value, rproperty, sizeof(msg.value));
             }
+            free(rproperty);
         }
 
         /* Send the property value back */
