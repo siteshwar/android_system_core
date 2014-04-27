@@ -1012,7 +1012,7 @@ static bool selinux_is_disabled(void)
         return true;
     }
 
-    return false;
+    return true;
 }
 
 static bool selinux_is_enforcing(void)
